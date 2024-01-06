@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"sync"
 	"time"
 )
 
@@ -64,7 +65,10 @@ func main() {
 
 	// 执行所有插件
 	if *tFlag != "" {
+		start := time.Now()
 		pm.ExecuteAll(*tFlag, false)
+		elapsed := time.Since(start).Seconds()
+		fmt.Printf("函数执行时间: %fs\n", elapsed)
 	}
 	if *fFlag != "" {
 		urls, err := readLinesWithoutNewline(*fFlag)
@@ -74,9 +78,17 @@ func main() {
 		}
 		fmt.Printf("[*] Check %d urls...\n", len(urls))
 		start := time.Now()
+
+		var wg sync.WaitGroup
 		for _, url := range urls {
-			pm.ExecuteAll(url, true)
+			wg.Add(1)
+			go func(u string) {
+				defer wg.Done()
+				pm.ExecuteAll(u, true)
+			}(url)
 		}
+		wg.Wait()
+
 		elapsed := time.Since(start).Seconds()
 		fmt.Printf("函数执行时间: %.1fs\n", elapsed)
 	}

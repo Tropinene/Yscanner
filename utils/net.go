@@ -25,7 +25,14 @@ func RequestDo(request *http.Request, hasRaw bool, timeout time.Duration) (Resp,
 			result.RequestRaw = string(requestOut)
 		}
 	}
-	var client = &http.Client{Timeout: time.Second * timeout}
+	transport := &http.Transport{
+		MaxIdleConns:    10, // 适当调整连接池大小
+		IdleConnTimeout: 5 * time.Second,
+	}
+	var client = &http.Client{
+		Timeout:   time.Second * timeout,
+		Transport: transport,
+	}
 	result.Other, err = client.Do(request)
 	if err != nil {
 		return result, err
