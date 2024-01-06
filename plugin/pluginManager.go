@@ -88,9 +88,9 @@ func (pm *PluginManager) ExecuteAll(netloc string) {
 		fmt.Printf("[*] 检查 %s\n", res.Name)
 		// 执行插件
 		if plugin.Check(netloc) {
-			fmt.Printf("[+] 存在 %s\n\n", res.Name)
+			fmt.Printf("[+] %s 存在 %s\n\n", netloc, res.Name)
 		} else {
-			fmt.Printf("[-] 不存在 %s\n\n", res.Name)
+			fmt.Printf("[-] %s 不存在 %s\n\n", netloc, res.Name)
 		}
 	}
 }

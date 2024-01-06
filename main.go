@@ -3,8 +3,11 @@ package main
 
 import (
 	goplugin "Yscanner/plugin"
+	"bufio"
 	"flag"
 	"fmt"
+	"os"
+	"strings"
 )
 
 func main() {
@@ -12,13 +15,18 @@ func main() {
 
 	tFlag := flag.String("t", "", "待检测url, 例如http://127.0.0.1")
 	vFlag := flag.String("v", "", "检测的漏洞，不指定默认全部检测")
+	fFlag := flag.String("f", "", "存储检测url的文件")
 
 	// 解析命令行参数
 	flag.Parse()
 
 	// 检查是否提供了必须的参数 -t
-	if *tFlag == "" {
-		fmt.Println("错误：缺少必须的参数 -t")
+	if *tFlag == "" && *fFlag == "" {
+		fmt.Println("[ERROR] 缺少检测目标")
+		return
+	}
+	if *tFlag != "" && *fFlag != "" {
+		fmt.Println("[ERROR] 检测目标重复")
 		return
 	}
 
@@ -29,7 +37,7 @@ func main() {
 		// 获取对应的插件
 		targetPlugin := goplugin.GetPluginByVulnID(*vFlag)
 		if targetPlugin == nil {
-			fmt.Println("[-] 未找到对应VulnID的插件")
+			fmt.Println("[ERROR] 未找到对应VulnID的插件: ", *vFlag)
 			return
 		}
 		plugins = append(plugins, targetPlugin)
@@ -48,7 +56,19 @@ func main() {
 	}
 
 	// 执行所有插件
-	pm.ExecuteAll(*tFlag)
+	if *tFlag != "" {
+		pm.ExecuteAll(*tFlag)
+	}
+	if *fFlag != "" {
+		urls, err := readLinesWithoutNewline(*fFlag)
+		if err != nil {
+			fmt.Println("[Error]", err)
+			return
+		}
+		for _, url := range urls {
+			pm.ExecuteAll(url)
+		}
+	}
 }
 
 func welcome() {
@@ -65,4 +85,37 @@ func welcome() {
 	 ░ ░              ░              ░                                              
 	`
 	fmt.Println(banner)
+}
+
+func removeNewline(input string) string {
+	return strings.TrimRight(input, "\n")
+}
+
+func readLinesWithoutNewline(filePath string) ([]string, error) {
+	var lines []string
+
+	// 打开文件
+	file, err := os.Open(filePath)
+	if err != nil {
+		return nil, fmt.Errorf("[ERROR] 无法打开文件: %v", err)
+	}
+	defer file.Close()
+
+	// 创建一个带缓冲的读取器
+	scanner := bufio.NewScanner(file)
+
+	// 逐行读取文件内容
+	for scanner.Scan() {
+		line := scanner.Text()
+		// 调用函数删除末尾的换行符
+		line = removeNewline(line)
+		lines = append(lines, line)
+	}
+
+	// 检查是否有读取错误
+	if err := scanner.Err(); err != nil {
+		return nil, fmt.Errorf("[ERROR] 读取文件时发生错误: %v", err)
+	}
+
+	return lines, nil
 }
