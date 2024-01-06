@@ -11,4 +11,12 @@ go run main.go -t http://127.0.0.1
 ```bash
 go run main.go -t http://127.0.0.1 -v CVE-2023-35843
 ```
+从文件中读入大量url检测
+```bash
+go run main.go -f urls.txt
+```
+展示支持的检测插件
+```bash
+go run main.go -s
+```
 ## 支持漏洞列表

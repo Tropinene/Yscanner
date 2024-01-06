@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"time"
 )
 
 func main() {
@@ -72,9 +73,12 @@ func main() {
 			return
 		}
 		fmt.Printf("[*] Check %d urls...\n", len(urls))
+		start := time.Now()
 		for _, url := range urls {
 			pm.ExecuteAll(url, true)
 		}
+		elapsed := time.Since(start).Seconds()
+		fmt.Printf("函数执行时间: %.1fs\n", elapsed)
 	}
 }
 
