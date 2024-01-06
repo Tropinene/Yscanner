@@ -26,6 +26,7 @@ type PluginInfo struct {
 	Level    string
 	URL      string
 	Version  string
+	CWE      string
 }
 
 var (
