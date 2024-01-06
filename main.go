@@ -22,11 +22,11 @@ func main() {
 
 	// 检查是否提供了必须的参数 -t
 	if *tFlag == "" && *fFlag == "" {
-		fmt.Println("[ERROR] 缺少检测目标")
+		fmt.Println("\033[1;35m[ERROR] 缺少检测目标\033[0m")
 		return
 	}
 	if *tFlag != "" && *fFlag != "" {
-		fmt.Println("[ERROR] 检测目标重复")
+		fmt.Println("\033[1;35m[ERROR] 检测目标重复\033[0m")
 		return
 	}
 
@@ -37,7 +37,7 @@ func main() {
 		// 获取对应的插件
 		targetPlugin := goplugin.GetPluginByVulnID(*vFlag)
 		if targetPlugin == nil {
-			fmt.Println("[ERROR] 未找到对应VulnID的插件: ", *vFlag)
+			fmt.Printf("\033[1;35m[ERROR] 未找到对应VulnID的插件: %s\033[0m\n", *vFlag)
 			return
 		}
 		plugins = append(plugins, targetPlugin)
@@ -62,7 +62,7 @@ func main() {
 	if *fFlag != "" {
 		urls, err := readLinesWithoutNewline(*fFlag)
 		if err != nil {
-			fmt.Println("[Error]", err)
+			fmt.Printf("\033[1;35m[Error] %v\033[0m\n", err)
 			return
 		}
 		for _, url := range urls {
@@ -97,7 +97,7 @@ func readLinesWithoutNewline(filePath string) ([]string, error) {
 	// 打开文件
 	file, err := os.Open(filePath)
 	if err != nil {
-		return nil, fmt.Errorf("[ERROR] 无法打开文件: %v", err)
+		return nil, fmt.Errorf("\033[1;35m[ERROR] 无法打开文件: %v\033[0m", err)
 	}
 	defer file.Close()
 
@@ -114,7 +114,7 @@ func readLinesWithoutNewline(filePath string) ([]string, error) {
 
 	// 检查是否有读取错误
 	if err := scanner.Err(); err != nil {
-		return nil, fmt.Errorf("[ERROR] 读取文件时发生错误: %v", err)
+		return nil, fmt.Errorf("\033[1;35m[ERROR] 读取文件时发生错误: %v\033[0m", err)
 	}
 
 	return lines, nil
