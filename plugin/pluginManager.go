@@ -81,17 +81,21 @@ func (pm *PluginManager) Register(plugin Plugin) {
 }
 
 // ExecuteAll 执行所有插件
-func (pm *PluginManager) ExecuteAll(netloc string) {
+func (pm *PluginManager) ExecuteAll(netloc string, is_file bool) {
 	pm.mu.Lock()
 	defer pm.mu.Unlock()
 	for _, plugin := range pm.plugins {
 		res := plugin.Info()
-		fmt.Printf("[*] 检查 %s\n", res.Name)
+		if !is_file {
+			fmt.Printf("[*] 检查 %s\n", res.Name)
+		}
 		// 执行插件
 		if plugin.Check(netloc) {
 			fmt.Printf("\033[1;31m[+] %s 存在 %s\033[0m\n\n", netloc, res.Name)
 		} else {
-			fmt.Printf("\033[1;36m[-] %s 不存在 %s\033[0m\n\n", netloc, res.Name)
+			if !is_file {
+				fmt.Printf("\033[1;36m[-] %s 不存在 %s\033[0m\n\n", netloc, res.Name)
+			}
 		}
 	}
 }

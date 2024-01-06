@@ -16,9 +16,15 @@ func main() {
 	tFlag := flag.String("t", "", "待检测url, 例如http://127.0.0.1")
 	vFlag := flag.String("v", "", "检测的漏洞，不指定默认全部检测")
 	fFlag := flag.String("f", "", "存储检测url的文件")
+	showFlag := flag.Bool("s", false, "展示所有检测插件")
 
 	// 解析命令行参数
 	flag.Parse()
+
+	if *showFlag {
+		showPlugins()
+		return
+	}
 
 	// 检查是否提供了必须的参数 -t
 	if *tFlag == "" && *fFlag == "" {
@@ -57,7 +63,7 @@ func main() {
 
 	// 执行所有插件
 	if *tFlag != "" {
-		pm.ExecuteAll(*tFlag)
+		pm.ExecuteAll(*tFlag, false)
 	}
 	if *fFlag != "" {
 		urls, err := readLinesWithoutNewline(*fFlag)
@@ -65,8 +71,9 @@ func main() {
 			fmt.Printf("\033[1;35m[Error] %v\033[0m\n", err)
 			return
 		}
+		fmt.Printf("[*] Check %d urls...\n", len(urls))
 		for _, url := range urls {
-			pm.ExecuteAll(url)
+			pm.ExecuteAll(url, true)
 		}
 	}
 }
@@ -118,4 +125,14 @@ func readLinesWithoutNewline(filePath string) ([]string, error) {
 	}
 
 	return lines, nil
+}
+
+func showPlugins() {
+	plugins := goplugin.GetAllPlugins()
+
+	// 打印每个插件的信息
+	for idx, plugin := range plugins {
+		info := plugin.Info()
+		fmt.Printf("[%d] %s\n", idx+1, info.Name)
+	}
 }

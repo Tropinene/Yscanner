@@ -8,17 +8,15 @@ import (
 	"strings"
 )
 
-// 注册插件2
 func init() {
 	Register("NocoDB_cve_2023_35843", &NocoDB_cve_2023_35843{})
 }
 
-// 示例插件2
 type NocoDB_cve_2023_35843 struct{}
 
 func (p *NocoDB_cve_2023_35843) Info() PluginInfo {
 	return PluginInfo{
-		Name:     "NocoDB download 任意文件读取漏洞（CVE-2023-35843）",
+		Name:     "NocoDB 任意文件读取漏洞（CVE-2023-35843）",
 		VulnInfo: "NocoDB是Airtable的开源替代品,将 MySQL、PostgreSQL、SQL Server、SQLite 或 MariaDB 转换为智能电子表格。CVE-2023-35843 中，攻击者可构造恶意请求，遍历读取系统上的文件，造成敏感信息泄漏。",
 		VulnID:   "CVE-2023-35843",
 		Level:    "7.5 HIGH",
