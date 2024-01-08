@@ -91,7 +91,7 @@ func (pm *PluginManager) ExecuteAll(netloc string, is_file bool) {
 		}
 		// 执行插件
 		if plugin.Check(netloc) {
-			fmt.Printf("\033[1;31m[+] %s 存在 %s \033[35m%s\033[33m\n", netloc, res.Name, res.Level)
+			fmt.Printf("\033[35m[%s] \033[1;31m %s: %s\033[0m\n", res.Level, res.Name, netloc)
 		} else {
 			if !is_file {
 				fmt.Printf("\033[1;36m[-] %s 不存在 %s\033[0m\n", netloc, res.Name)
