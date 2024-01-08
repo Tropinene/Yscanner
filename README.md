@@ -20,3 +20,4 @@ go run main.go -f urls.txt
 go run main.go -s
 ```
 ## 支持漏洞列表
+1
