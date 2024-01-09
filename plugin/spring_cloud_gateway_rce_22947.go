@@ -5,6 +5,7 @@ import (
 	"bytes"
 	"fmt"
 	"net/http"
+	"strconv"
 	"strings"
 )
 
@@ -71,7 +72,7 @@ func (p *spring_cloud_gateway_rce_22947) Check(netloc string) bool {
 		}
 
 		fmt.Println(resp2.ResponseRaw)
-		if resp2.Other.StatusCode == 200 && strings.Contains(resp2.ResponseRaw, string(rune(12345+22223))) {
+		if resp2.Other.StatusCode == 200 && strings.Contains(resp2.ResponseRaw, strconv.Itoa(12345+22223)) {
 			return true
 		}
 		// todo 替换成randam数字加减
