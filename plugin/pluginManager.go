@@ -3,6 +3,7 @@ package goplugin
 
 import (
 	"fmt"
+	"strings"
 	"sync"
 )
 
@@ -59,6 +60,19 @@ func GetPluginByVulnID(vulnID string) Plugin {
 	plugins := GetAllPlugins()
 	for _, plugin := range plugins {
 		if plugin.Info().VulnID == vulnID {
+			return plugin
+		}
+	}
+	return nil
+}
+
+// 函数用于根据 指纹 返回对应的插件
+func GetPluginByFingerprint(fingerPrint string) Plugin {
+	plugins := GetAllPlugins()
+	for _, plugin := range plugins {
+		info := strings.ToLower(plugin.Info().Name)
+		fingerPrint = strings.ToLower(fingerPrint)
+		if strings.Contains(info, fingerPrint) {
 			return plugin
 		}
 	}

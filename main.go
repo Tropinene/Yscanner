@@ -16,7 +16,8 @@ func main() {
 	welcome()
 
 	tFlag := flag.String("t", "", "待检测url, 例如http://127.0.0.1")
-	vFlag := flag.String("v", "", "检测的漏洞，不指定默认全部检测")
+	vFlag := flag.String("v", "", "载入指定漏洞编号的插件，不指定默认全部检测")
+	pFlag := flag.String("p", "", "按指纹载入插件")
 	fFlag := flag.String("f", "", "存储检测url的文件")
 	showFlag := flag.Bool("s", false, "展示所有检测插件")
 
@@ -46,6 +47,13 @@ func main() {
 		targetPlugin := goplugin.GetPluginByVulnID(*vFlag)
 		if targetPlugin == nil {
 			fmt.Printf("\033[1;35m[ERROR] 未找到对应VulnID的插件: %s\033[0m\n", *vFlag)
+			return
+		}
+		plugins = append(plugins, targetPlugin)
+	} else if *pFlag != "" {
+		targetPlugin := goplugin.GetPluginByFingerprint(*pFlag)
+		if targetPlugin == nil {
+			fmt.Printf("\033[1;35m[ERROR] 未找到对应指纹的插件: %s\033[0m\n", *pFlag)
 			return
 		}
 		plugins = append(plugins, targetPlugin)
@@ -110,9 +118,9 @@ func welcome() {
 	fmt.Println(banner)
 }
 
-func removeNewline(input string) string {
-	return strings.TrimRight(input, "\n")
-}
+// func removeNewline(input string) string {
+// 	return strings.TrimRight(input, "\n")
+// }
 
 func readLinesWithoutNewline(filePath string) ([]string, error) {
 	var lines []string
@@ -131,7 +139,8 @@ func readLinesWithoutNewline(filePath string) ([]string, error) {
 	for scanner.Scan() {
 		line := scanner.Text()
 		// 调用函数删除末尾的换行符
-		line = removeNewline(line)
+		line = strings.TrimRight(line, "\n")
+		line = strings.TrimRight(line, "\\")
 		lines = append(lines, line)
 	}
 

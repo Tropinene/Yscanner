@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"crypto/tls"
 	"io"
 	"net/http"
 	"net/http/httputil"
@@ -18,7 +19,7 @@ type Resp struct {
 func RequestDo(request *http.Request, hasRaw bool, timeout time.Duration) (Resp, error) {
 	var result Resp
 	var err error
-	request.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36")
+	// request.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36")
 	if hasRaw {
 		requestOut, err := httputil.DumpRequestOut(request, true)
 		if err == nil {
@@ -26,8 +27,11 @@ func RequestDo(request *http.Request, hasRaw bool, timeout time.Duration) (Resp,
 		}
 	}
 	transport := &http.Transport{
-		MaxIdleConns:    10, // 适当调整连接池大小
+		MaxIdleConns:    10,
 		IdleConnTimeout: 5 * time.Second,
+		TLSClientConfig: &tls.Config{
+			InsecureSkipVerify: true,
+		},
 	}
 	var client = &http.Client{
 		Timeout:   time.Second * timeout,
@@ -37,14 +41,11 @@ func RequestDo(request *http.Request, hasRaw bool, timeout time.Duration) (Resp,
 	if err != nil {
 		return result, err
 	}
-	defer result.Other.Body.Close()
 
-	if hasRaw {
-		ResponseOut, err := httputil.DumpResponse(result.Other, true)
-		if err == nil {
-			result.ResponseRaw = string(ResponseOut)
-		}
-	}
 	result.Body, _ = io.ReadAll(result.Other.Body)
+	result.Other.Body.Close()
+	if hasRaw {
+		result.ResponseRaw = string(result.Body)
+	}
 	return result, err
 }
