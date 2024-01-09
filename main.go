@@ -3,6 +3,7 @@ package main
 
 import (
 	goplugin "Yscanner/plugin"
+	"Yscanner/utils"
 	"bufio"
 	"flag"
 	"fmt"
@@ -87,18 +88,23 @@ func main() {
 		fmt.Printf("[*] Check %d urls...\n", len(urls))
 		start := time.Now()
 
+		// 增加了一个进度条，但是好像不是很顺滑
+		bar := utils.Newbar(int64(len(urls)))
 		var wg sync.WaitGroup
 		for _, url := range urls {
 			wg.Add(1)
 			go func(u string) {
 				defer wg.Done()
 				pm.ExecuteAll(u, true)
+
+				bar.Done(1)
 			}(url)
 		}
 		wg.Wait()
+		bar.Finish()
 
 		elapsed := time.Since(start).Seconds()
-		fmt.Printf("函数执行时间: %.1fs\n", elapsed)
+		fmt.Printf("检测所用时间: %.1fs\n", elapsed)
 	}
 }
 
