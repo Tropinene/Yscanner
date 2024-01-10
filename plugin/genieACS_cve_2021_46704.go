@@ -6,8 +6,6 @@ import (
 	"net/http"
 	"strconv"
 	"strings"
-
-	"github.com/opensec-cn/kunpeng/util"
 )
 
 func init() {
@@ -37,7 +35,7 @@ func (p *genieACS_cve_2021_46704) Check(netloc string) bool {
 	if err != nil {
 		return false
 	}
-	resp_check, err := util.RequestDo(req_check, true, 2)
+	resp_check, err := utils.RequestDo(req_check, true, 2)
 	if err != nil {
 		return false
 	}
