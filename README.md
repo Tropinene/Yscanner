@@ -5,22 +5,22 @@
 ## 使用
 运行全部插件
 ```bash
-go run main.go -t http://127.0.0.1
+./Yscanner -t http://127.0.0.1
 ```
 运行指定漏洞检测插件
 ```bash
-go run main.go -t http://127.0.0.1 -v CVE-2023-35843
+./Yscanner -t http://127.0.0.1 -v CVE-2023-35843
 ```
 通过指定指纹载入检测插件(支持模糊搜索)
 ```bash
-go run main.go -t http://127.0.0.1 -p weblogic
+./Yscanner -t http://127.0.0.1 -p weblogic
 ```
 从文件中读入大量url检测
 ```bash
-go run main.go -f urls.txt
+./Yscanner -f urls.txt
 ```
 展示支持的检测插件
 ```bash
-go run main.go -s
+./Yscanner -s
 ```
 ## 支持漏洞列表
