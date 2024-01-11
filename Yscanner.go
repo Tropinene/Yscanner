@@ -57,7 +57,7 @@ func main() {
 			fmt.Printf("\033[1;35m[ERROR] 未找到对应指纹的插件: %s\033[0m\n", *pFlag)
 			return
 		}
-		plugins = append(plugins, targetPlugin)
+		plugins = targetPlugin
 	} else {
 		// 如果没有提供 -v 参数，获取所有插件
 		plugins = goplugin.GetAllPlugins()
