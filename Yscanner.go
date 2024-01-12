@@ -68,14 +68,18 @@ func main() {
 
 	// 注册插件
 	for _, plugin := range plugins {
-		// fmt.Printf("[+] Registering plugin: %s\n", name)
+		// fmt.Printf("[+] Registering plugin: %s\n", plugin.Info().Name)
 		pm.Register(plugin)
 	}
 
 	// 执行所有插件
 	if *tFlag != "" {
+		// todo 这里只有检测结束了才回输出结果，等待过程有点无聊
 		start := time.Now()
-		pm.ExecuteAll(*tFlag, false)
+		res := pm.ExecuteAll(*tFlag, false)
+		for _, info := range res {
+			fmt.Println(info)
+		}
 		elapsed := time.Since(start).Seconds()
 		fmt.Printf("检测所用时间: %fs\n", elapsed)
 	}
@@ -95,7 +99,10 @@ func main() {
 			wg.Add(1)
 			go func(u string) {
 				defer wg.Done()
-				pm.ExecuteAll(u, true)
+				res := pm.ExecuteAll(u, true)
+				for _, info := range res {
+					fmt.Println(info)
+				}
 
 				bar.Done(1)
 			}(url)
