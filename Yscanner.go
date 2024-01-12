@@ -77,7 +77,7 @@ func main() {
 		start := time.Now()
 		pm.ExecuteAll(*tFlag, false)
 		elapsed := time.Since(start).Seconds()
-		fmt.Printf("函数执行时间: %fs\n", elapsed)
+		fmt.Printf("检测所用时间: %fs\n", elapsed)
 	}
 	if *fFlag != "" {
 		urls, err := readLinesWithoutNewline(*fFlag)
