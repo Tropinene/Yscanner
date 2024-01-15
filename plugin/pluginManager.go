@@ -68,12 +68,13 @@ func GetPluginByVulnID(vulnID string) Plugin {
 
 // 函数用于根据 指纹 返回对应的插件
 func GetPluginByFingerprint(fingerPrint string) []Plugin {
+	fingerPrint = strings.ToLower(fingerPrint)
 	plugins := GetAllPlugins()
 	var target_plugins []Plugin
+
 	for _, plugin := range plugins {
 		info := strings.ToLower(plugin.Info().Name)
 		info = strings.ReplaceAll(info, " ", "")
-		fingerPrint = strings.ToLower(fingerPrint)
 		if strings.Contains(info, fingerPrint) {
 			target_plugins = append(target_plugins, plugin)
 		}

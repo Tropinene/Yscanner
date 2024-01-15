@@ -42,24 +42,19 @@ func main() {
 
 	var plugins []goplugin.Plugin
 
-	// 如果提供了 -v 参数，只获取对应的插件
 	if *vFlag != "" {
-		// 获取对应的插件
-		targetPlugin := goplugin.GetPluginByVulnID(*vFlag)
-		if targetPlugin == nil {
+		plugins := goplugin.GetPluginByVulnID(*vFlag)
+		if plugins == nil {
 			fmt.Printf("\033[1;35m[ERROR] 未找到对应VulnID的插件: %s\033[0m\n", *vFlag)
 			return
 		}
-		plugins = append(plugins, targetPlugin)
 	} else if *pFlag != "" {
-		targetPlugin := goplugin.GetPluginByFingerprint(*pFlag)
-		if targetPlugin == nil {
+		plugins := goplugin.GetPluginByFingerprint(*pFlag)
+		if plugins == nil {
 			fmt.Printf("\033[1;35m[ERROR] 未找到对应指纹的插件: %s\033[0m\n", *pFlag)
 			return
 		}
-		plugins = targetPlugin
 	} else {
-		// 如果没有提供 -v 参数，获取所有插件
 		plugins = goplugin.GetAllPlugins()
 	}
 
@@ -171,6 +166,6 @@ func showPlugins() {
 	// 打印每个插件的信息
 	for idx, plugin := range plugins {
 		info := plugin.Info()
-		fmt.Printf("[%d] %s\n", idx+1, info.Name)
+		fmt.Printf("[%2d] %-15s %s\n", idx+1, info.Level, info.Name)
 	}
 }
