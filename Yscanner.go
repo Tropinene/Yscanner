@@ -76,15 +76,15 @@ func main() {
 			fmt.Println(info)
 		}
 		elapsed := time.Since(start).Seconds()
-		fmt.Printf("检测所用时间: %fs\n", elapsed)
+		fmt.Printf("\033[36m[INFO] 检测所用时间: %fs\n\033[0m", elapsed)
 	}
 	if *fFlag != "" {
 		urls, err := readLinesWithoutNewline(*fFlag)
 		if err != nil {
-			fmt.Printf("\033[1;35m[Error] %v\033[0m\n", err)
+			fmt.Printf("\033[1;35m[ERROR] %v\033[0m\n", err)
 			return
 		}
-		fmt.Printf("[*] Check %d urls...\n", len(urls))
+		fmt.Printf("\033[36m[INFO] Check %d urls...\n\033[0m", len(urls))
 		start := time.Now()
 
 		// 增加了一个进度条，但是好像不是很顺滑
@@ -106,7 +106,7 @@ func main() {
 		bar.Finish()
 
 		elapsed := time.Since(start).Seconds()
-		fmt.Printf("检测所用时间: %.1fs\n", elapsed)
+		fmt.Printf("\033[36m[INFO] 检测所用时间: %.1fs\n\033[0m", elapsed)
 	}
 }
 
@@ -162,6 +162,6 @@ func showPlugins() {
 	// 打印每个插件的信息
 	for idx, plugin := range plugins {
 		info := plugin.Info()
-		fmt.Printf("[%2d] %-14s %-15s %s\n", idx+1, info.Level, info.VulnID, info.Name)
+		fmt.Printf("\033[36m[%2d] %-13s | %-15s | %s\n\033[0m", idx+1, info.Level, info.VulnID, info.Name)
 	}
 }

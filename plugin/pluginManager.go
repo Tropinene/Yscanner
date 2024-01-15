@@ -116,7 +116,7 @@ func (pm *PluginManager) ExecuteAll(netloc string, is_file bool) []string {
 			info = fmt.Sprintf("\r\033[33m[!] \033[1;31m%-12s | %-14s | %s: \033[1;34m%s\033[0m", res.Level, res.VulnID, res.Name, netloc)
 		} else {
 			if !is_file {
-				info = fmt.Sprintf("\033[1;36m[-] %s 不存在 %s\033[0m", netloc, res.Name)
+				info = fmt.Sprintf("\033[36m[INFO] %s 不存在 %s\033[0m", netloc, res.Name)
 			}
 		}
 		if info != "" {
