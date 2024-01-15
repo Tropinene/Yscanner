@@ -14,7 +14,7 @@ type zlmediakit_rce_cve_2023_39067 struct{}
 
 func (p *zlmediakit_rce_cve_2023_39067) Info() PluginInfo {
 	return PluginInfo{
-		Name:     "ZLMediaKiet 跨站脚本漏洞（CVE-2023-39067）",
+		Name:     "ZLMediaKiet 跨站脚本漏洞",
 		VulnInfo: "ZLMediaKiet是ZLMediaKiet开源的一个基于 C++11 的高性能运营级流媒体服务框架。ZLMediaKiet v.4.0和v.5.0版本存在安全漏洞，该漏洞源于存在跨站脚本（XSS）漏洞。攻击者可利用该漏洞通过构建有效载荷对URL执行任意代码。",
 		VulnID:   "CVE-2023-39067",
 		Level:    "6.1 MEDIUM",

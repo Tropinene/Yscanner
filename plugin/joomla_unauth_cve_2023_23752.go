@@ -16,7 +16,7 @@ type joomla_unauth_cve_2023_23752 struct{}
 
 func (p *joomla_unauth_cve_2023_23752) Info() PluginInfo {
 	return PluginInfo{
-		Name:     "Joomla未授权漏洞（CVE-2023-23752）",
+		Name:     "Joomla未授权漏洞",
 		VulnInfo: "Joomla!是一套全球知名的内容管理系统。Joomla!是使用PHP语言加上MySQL数据库所开发的软件系统。CVE-2023-23752 中，由于鉴权存在错误，导致攻击者可构造恶意请求未授权访问RestAPI 接口，造成敏感信息泄漏，获取Joomla相关配置信息。",
 		VulnID:   "CVE-2023-23752",
 		Level:    "5.3 MEDIUM",

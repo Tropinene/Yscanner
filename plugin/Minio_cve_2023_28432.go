@@ -17,7 +17,7 @@ type Minio_cve_2023_28432 struct{}
 
 func (p *Minio_cve_2023_28432) Info() PluginInfo {
 	return PluginInfo{
-		Name:     "MinIO 信息泄露漏洞（CVE-2023-28432）",
+		Name:     "MinIO 信息泄露漏洞",
 		VulnInfo: "MinIO 存在信息泄露漏洞，在集群部署的MinIO中，未经身份认证的远程攻击者通过发送特殊HTTP请求即可获取所有环境变量，其中包括MINIO_SECRET_KEY和MINIO_ROOT_PASSWORD，造成敏感信息泄露，最终可能导致攻击者以管理员身份登录MinIO。",
 		VulnID:   "CVE-2023-28432",
 		Level:    "7.5 HIGH",

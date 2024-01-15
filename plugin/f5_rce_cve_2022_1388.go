@@ -17,7 +17,7 @@ type f5_rce_cve_2022_1388 struct{}
 
 func (p *f5_rce_cve_2022_1388) Info() PluginInfo {
 	return PluginInfo{
-		Name:     "F5 BIG-IP 远程代码执行漏洞（CVE-2022-1388）",
+		Name:     "F5 BIG-IP 远程代码执行漏洞",
 		VulnInfo: "F5 BIG-IP是美国F5公司的一款集成了网络流量管理、应用程序安全管理、负载均衡等功能的应用交付平台。iControl REST 是iControl 框架的演变，使用 REpresentational State Transfer (REST)。这允许用户或脚本与 F5 设备之间进行轻量级、快速的交互。CVE-2022-1388 中，攻击者可在无需身份认证的情况下调用相关Rest API，从而执行任意命令。",
 		VulnID:   "CVE-2022-1388",
 		Level:    "9.8 CRITICAL",

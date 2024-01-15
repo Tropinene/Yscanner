@@ -15,7 +15,7 @@ type superset_bypass_cve_2023_27524 struct{}
 
 func (p *superset_bypass_cve_2023_27524) Info() PluginInfo {
 	return PluginInfo{
-		Name:     "Apache Superset 默认SECRET_KEY漏洞（CVE-2023-27524）",
+		Name:     "Apache Superset 默认SECRET_KEY漏洞",
 		VulnInfo: "Apache Superset 是一款现代化的开源大数据工具，用于数据探索分析和数据可视化。未经授权的攻击者可根据默认配置的SECRET_KEY伪造成管理员用户访问Apache Superset。",
 		VulnID:   "CVE-2023-27524",
 		Level:    "9.8 CRITICAL",

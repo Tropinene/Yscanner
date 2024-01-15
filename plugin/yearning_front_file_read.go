@@ -14,7 +14,7 @@ type yearning_front_file_read struct{}
 
 func (p *yearning_front_file_read) Info() PluginInfo {
 	return PluginInfo{
-		Name:     "Yearning front 任意文件读取漏洞（CVE-2022-27043）",
+		Name:     "Yearning front 任意文件读取漏洞",
 		VulnInfo: "Yearning是中国Henry Yee个人开发者的一个出色方便快捷的 Mysql SQL 审核平台。Yearning存在一个任意文件读取漏洞。攻击者可以利用该漏洞获取敏感信息。",
 		VulnID:   "CVE-2022-27043",
 		Level:    "7.5 HIGH",

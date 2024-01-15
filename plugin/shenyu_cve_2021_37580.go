@@ -14,7 +14,7 @@ type shenyu_cve_2021_37580 struct{}
 
 func (p *shenyu_cve_2021_37580) Info() PluginInfo {
 	return PluginInfo{
-		Name:     "Apache ShenYu Admin JWT认证绕过漏洞（CVE-2021-37580）",
+		Name:     "Apache ShenYu Admin JWT认证绕过漏洞",
 		VulnInfo: "Apache ShenYu 是应用于所有微服务场景的，可扩展、高性能、响应式的 API 网关解决方案。Apache ShenYu Admin 2.3.0 及 2.4.0 版本中存在身份验证绕过漏洞，攻击者可通过该漏洞绕过JSON Web Token (JWT)安全认证，直接进入系统后台",
 		VulnID:   "CVE-2021-37580",
 		Level:    "9.8 CRITICAL",

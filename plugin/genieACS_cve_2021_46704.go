@@ -16,7 +16,7 @@ type genieACS_cve_2021_46704 struct{}
 
 func (p *genieACS_cve_2021_46704) Info() PluginInfo {
 	return PluginInfo{
-		Name:     "GenieACS api ping 远程命令执行漏洞（CVE-2021-46704）",
+		Name:     "GenieACS api ping 远程命令执行漏洞",
 		VulnInfo: "GenieACS是一款高性能自动配置服务器 (ACS)，用于远程管理启用 TR-069 的设备。GenieACS 1.2.8之前的版本 存在安全漏洞，该漏洞源于输入验证不足以及缺少授权检查造成的，UI接口API很容易通过ping主机参数进行未经身份验证的OS命令注入的攻击。",
 		VulnID:   "CVE-2021-46704",
 		Level:    "9.8 CRITICAL",

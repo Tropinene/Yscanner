@@ -56,11 +56,15 @@ func GetAllPlugins() []Plugin {
 }
 
 // 函数用于根据 VulnID 返回对应的插件
-func GetPluginByVulnID(vulnID string) Plugin {
-	plugins := GetAllPlugins()
-	for _, plugin := range plugins {
+func GetPluginByVulnID(vulnID string) []Plugin {
+	registryLock.Lock()
+	defer registryLock.Unlock()
+
+	var plugins []Plugin
+	for _, plugin := range registry {
 		if plugin.Info().VulnID == vulnID {
-			return plugin
+			plugins = append(plugins, plugin)
+			return plugins
 		}
 	}
 	return nil
@@ -69,17 +73,18 @@ func GetPluginByVulnID(vulnID string) Plugin {
 // 函数用于根据 指纹 返回对应的插件
 func GetPluginByFingerprint(fingerPrint string) []Plugin {
 	fingerPrint = strings.ToLower(fingerPrint)
-	plugins := GetAllPlugins()
-	var target_plugins []Plugin
+	registryLock.Lock()
+	defer registryLock.Unlock()
 
-	for _, plugin := range plugins {
+	var plugins []Plugin
+	for _, plugin := range registry {
 		info := strings.ToLower(plugin.Info().Name)
 		info = strings.ReplaceAll(info, " ", "")
 		if strings.Contains(info, fingerPrint) {
-			target_plugins = append(target_plugins, plugin)
+			plugins = append(plugins, plugin)
 		}
 	}
-	return target_plugins
+	return plugins
 }
 
 // NewPluginManager 创建一个插件管理器
@@ -108,7 +113,7 @@ func (pm *PluginManager) ExecuteAll(netloc string, is_file bool) []string {
 		// 执行插件
 		if plugin.Check(netloc) {
 			// 这里开头的\r是为了覆盖进度条的
-			info = fmt.Sprintf("\r\033[33m[!] \033[35m%s \033[1;31m %s: \033[1;34m%s\033[0m", res.Level, res.Name, netloc)
+			info = fmt.Sprintf("\r\033[33m[!] \033[1;31m%-12s | %-14s | %s: \033[1;34m%s\033[0m", res.Level, res.VulnID, res.Name, netloc)
 		} else {
 			if !is_file {
 				info = fmt.Sprintf("\033[1;36m[-] %s 不存在 %s\033[0m", netloc, res.Name)

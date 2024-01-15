@@ -43,13 +43,13 @@ func main() {
 	var plugins []goplugin.Plugin
 
 	if *vFlag != "" {
-		plugins := goplugin.GetPluginByVulnID(*vFlag)
+		plugins = goplugin.GetPluginByVulnID(*vFlag)
 		if plugins == nil {
 			fmt.Printf("\033[1;35m[ERROR] 未找到对应VulnID的插件: %s\033[0m\n", *vFlag)
 			return
 		}
 	} else if *pFlag != "" {
-		plugins := goplugin.GetPluginByFingerprint(*pFlag)
+		plugins = goplugin.GetPluginByFingerprint(*pFlag)
 		if plugins == nil {
 			fmt.Printf("\033[1;35m[ERROR] 未找到对应指纹的插件: %s\033[0m\n", *pFlag)
 			return
@@ -126,10 +126,6 @@ func welcome() {
 	fmt.Println(banner)
 }
 
-// func removeNewline(input string) string {
-// 	return strings.TrimRight(input, "\n")
-// }
-
 func readLinesWithoutNewline(filePath string) ([]string, error) {
 	var lines []string
 
@@ -166,6 +162,6 @@ func showPlugins() {
 	// 打印每个插件的信息
 	for idx, plugin := range plugins {
 		info := plugin.Info()
-		fmt.Printf("[%2d] %-15s %s\n", idx+1, info.Level, info.Name)
+		fmt.Printf("[%2d] %-14s %-15s %s\n", idx+1, info.Level, info.VulnID, info.Name)
 	}
 }

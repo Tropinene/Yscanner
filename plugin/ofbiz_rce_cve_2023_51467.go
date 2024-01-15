@@ -16,7 +16,7 @@ type ofbiz_rce_cve_2023_51467 struct{}
 
 func (p *ofbiz_rce_cve_2023_51467) Info() PluginInfo {
 	return PluginInfo{
-		Name:     "Apache OFBiz groovy 远程代码执行漏洞（CVE-2023-51467）",
+		Name:     "Apache OFBiz groovy 远程代码执行漏洞",
 		VulnInfo: "Apache OFBiz是一个电子商务平台，用于构建大中型企业级、跨平台、跨数据库、跨应用服务器的多层、分布式电子商务类应用系统。攻击者可构造恶意请求绕过身份认证，利用后台相关接口功能执行groovy代码，执行任意命令，控制服务器。",
 		VulnID:   "CVE-2023-51467",
 		Level:    "9.8 CRITICAL",

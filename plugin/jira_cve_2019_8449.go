@@ -15,7 +15,7 @@ type jira_cve_2019_8449 struct{}
 
 func (p *jira_cve_2019_8449) Info() PluginInfo {
 	return PluginInfo{
-		Name:     "Jira信息泄露漏洞（CVE-2019-8449）",
+		Name:     "Jira信息泄露漏洞",
 		VulnInfo: "Atlassian Jira是澳大利亚Atlassian公司的一套缺陷跟踪管理系统。该系统主要用于对工作中各类问题、缺陷进行跟踪管理。 Atlassian Jira 8.4.0之前版本中的/rest/api/latest/groupuserpicker资源存在信息泄露漏洞。",
 		VulnID:   "CVE-2019-8449",
 		Level:    "5.3 MEDIUM",

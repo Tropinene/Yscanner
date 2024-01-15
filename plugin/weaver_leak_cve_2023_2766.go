@@ -14,7 +14,7 @@ type weaver_leak_cve_2023_2766 struct{}
 
 func (p *weaver_leak_cve_2023_2766) Info() PluginInfo {
 	return PluginInfo{
-		Name:     "泛微E-Office信息泄露（CVE-2023-2766）",
+		Name:     "泛微E-Office信息泄露",
 		VulnInfo: "泛微E-Office是一款企业级的全流程办公自动化软件，它包括协同办公、文档管理、知识管理、工作流管理等多个模块，涵盖了企业日常工作中的各个环节。该产品configfile存在信息泄露。",
 		VulnID:   "CVE-2023-2766",
 		Level:    "7.5 HIGH",

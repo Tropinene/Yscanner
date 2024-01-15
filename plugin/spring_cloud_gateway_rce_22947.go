@@ -17,7 +17,7 @@ type spring_cloud_gateway_rce_22947 struct{}
 
 func (p *spring_cloud_gateway_rce_22947) Info() PluginInfo {
 	return PluginInfo{
-		Name:     "Spring Cloud Gateway 远程代码执行漏洞（CVE-2022-22947）",
+		Name:     "Spring Cloud Gateway 远程代码执行漏洞",
 		VulnInfo: "VMware Spring Cloud Gateway是美国威睿（VMware）公司的提供了一个用于在 Spring WebFlux 之上构建 API 网关的库。其存在代码注入漏洞，远程攻击者可利用该漏洞发出恶意的请求并允许在远程主机上执行任意远程命令。",
 		VulnID:   "CVE-2022-22947",
 		Level:    "10.0 CRITICAL",

@@ -14,7 +14,7 @@ type jumpserver_cve_2023_42442 struct{}
 
 func (p *jumpserver_cve_2023_42442) Info() PluginInfo {
 	return PluginInfo{
-		Name:     "JumpServer未授权访问漏洞（CVE-2023-42442）",
+		Name:     "JumpServer未授权访问漏洞",
 		VulnInfo: "JumpServer是开源堡垒主机，专业的运维安全审计系统。API接口/api/v1/terminal/sessions/权限控制被破坏，该API会话重放可以在没有身份验证的情况下下载。",
 		VulnID:   "CVE-2023-42442",
 		Level:    "9.8 CRITICAL",

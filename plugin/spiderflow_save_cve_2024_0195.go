@@ -17,7 +17,7 @@ type spiderflow_save_cve_2024_0195 struct{}
 
 func (p *spiderflow_save_cve_2024_0195) Info() PluginInfo {
 	return PluginInfo{
-		Name:     "SpiderFlow 代码注入漏洞（CVE-2024-0195）",
+		Name:     "SpiderFlow 代码注入漏洞",
 		VulnInfo: "SpiderFlow是一个可视化的爬虫平台。SpiderFlow 0.4.3版本的FunctionService.saveFunction函数中发现了一个被归类为关键的漏洞。该漏洞可导致代码注入，并允许远程发起攻击。",
 		VulnID:   "CVE-2024-0195",
 		Level:    "9.8 CRITICAL",
