@@ -1,0 +1,884 @@
+[
+    {
+        "name":"Apache Ranger",
+        "method":"POST",
+        "path":"/login",
+        "body":"username=admin&password=admin",
+        "check":[
+            "\"statusCode\":200",
+            "\"msgDesc\":\"Login Successful\""
+        ]
+    },
+    {
+        "name":"3COM NJ2000",
+        "method":"POST",
+        "path":"/login.html",
+        "body":"password=password",
+        "check":[
+            "<title>3Com Corporation Web Interface</title>",
+            "<frame name=\"mainFrame\" src=\"blank.html\">"
+        ]
+    },
+    {
+        "name":"MOFI4500-4GXeLTE-V2",
+        "method":"POST",
+        "path":"/cgi-bin/luci/",
+        "body":"username=root&password=admin",
+        "check":[
+            "MOFI4500 - General - LuCI"
+        ]
+    },
+    {
+        "name":"XploitSPY",
+        "method":"POST",
+        "path":"/login",
+        "body":"username=admin&password=password&hostname={{hostname}}",
+        "check":[
+            "Change Password",
+            "Logout"
+        ]
+    },
+    {
+        "name":"Panabit Ixcache",
+        "method":"POST",
+        "path":"/login/userverify.cgi",
+        "body":"username=admin&password=ixcache",
+        "check":[
+            "\"URL=/cgi-bin/monitor.cgi\""
+        ]
+    },
+    {
+        "name":"Fuel CMS",
+        "method":"GET",
+        "path":"/fuel/login",
+        "body":null,
+        "check":[
+            "id=\"ci_csrf_token_FUEL\""
+        ]
+    },
+    {
+        "name":"ExacqVision",
+        "method":"POST",
+        "path":"/service.web",
+        "body":"action=login&u={{username}}&p={{password}}",
+        "check":[
+            "\"auth\":",
+            "\"success\": true",
+            "\"application/json\""
+        ]
+    },
+    {
+        "name":"Minio",
+        "method":"POST",
+        "path":"/minio/webrpc",
+        "body":"{\"id\":1,\"jsonrpc\":\"2.0\",\"params\":{\"username\":\"minioadmin\",\"password\":\"minioadmin\"},\"method\":\"Web.Login\"}",
+        "check":[
+            "\"application/json\"",
+            "\"result\":",
+            "\"token\":",
+            "\"jsonrpc\":"
+        ]
+    },
+    {
+        "name":"WebLogic",
+        "method":"POST",
+        "path":"/console/j_security_check",
+        "body":"j_username={{username}}&j_password={{password-1}}&j_character_encoding=UTF-8",
+        "check":[
+            "\"LoginForm.jsp\""
+        ]
+    },
+    {
+        "name":"Dataiku",
+        "method":"POST",
+        "path":"/dip/api/login",
+        "body":"login=admin&password=admin",
+        "check":[
+            "dss_access_token"
+        ]
+    },
+    {
+        "name":"Apache OfBiz",
+        "method":"POST",
+        "path":"/control/login",
+        "body":"USERNAME=admin&PASSWORD=ofbiz&FTOKEN=&JavaScriptEnabled=Y",
+        "check":[
+            "response.status == 200 || response.status == 302",
+            "ofbiz-pagination-template",
+            "<span>Powered by OFBiz</span>",
+            "user login id \"admin\" has been disabled"
+        ]
+    },
+    {
+        "name":"Guacamole",
+        "method":"POST",
+        "path":"/api/tokens",
+        "body":"username=guacadmin&password=guacadmin",
+        "check":[
+            "\"username\"",
+            "\"authToken\"",
+            "\"guacadmin\""
+        ]
+    },
+    {
+        "name":"ArcGis Admin/Manager/Rest",
+        "method":"POST",
+        "path":"/arcgis/admin/login?redirect=",
+        "body":"password=50f9095ae55d9c0c64b218b961e477475b908c5718142f02a10feac18915f6bd062a7d1c7305649f23992bf1c2e71a6e84293c46afd9b2d57364f77ef14f6095&username=66ebb130d91c4614dc01ed00809fdb613910ffb770da1b2dc1661769348e2344f17df8b6c14cbca70bf5b843cf04fcc9b799bd000b44915b358f0498b666b4f3&encrypted=true\n",
+        "check":[
+            "\"/arcgis/admin\"",
+            "\"AGS_ADMIN_TOKEN\""
+        ]
+    },
+    {
+        "name":"Apahce Tomcat Manager",
+        "method":"GET",
+        "path":"/manager/html",
+        "body":null,
+        "check":[
+            "JSESSIONID",
+            "\"<title>/manager</title>\""
+        ]
+    },
+    {
+        "name":"A8 Management Monitor",
+        "method":"GET",
+        "path":"/seeyon/management/index.jsp",
+        "body":null,
+        "check":[
+            "<title>A8 Management Monitor</title>"
+        ]
+    },
+    {
+        "name":"Rainloop WebMail",
+        "method":"GET",
+        "path":"/?/AdminAppData@no-mobile-0/0/15503332983847185/",
+        "body":null,
+        "check":[
+            "token\":\""
+        ]
+    },
+    {
+        "name":"D-Link AC",
+        "method":"POST",
+        "path":"/login.cgi?set_language=CN",
+        "body":"user=admin&password=admin&selectLanguage=CN&Submit=%E7%99%BB%E9%99%86",
+        "check":[
+            "\"window.open('index.htm?_\"",
+            "\"set-cookie\""
+        ]
+    },
+    {
+        "name":"Huawei HG532e",
+        "method":"POST",
+        "path":"/index/login.cgi",
+        "body":"Username=user&Password=MDRmODk5NmRhNzYzYjdhOTY5YjEwMjhlZTMwMDc1NjllYWYzYTYzNTQ4NmRkYWIyMTFkNTEyYzg1YjlkZjhmYg%3D%3D\n",
+        "check":[
+            "<title>replace</title>",
+            "SessionID"
+        ]
+    },
+    {
+        "name":"DataHub Metadata",
+        "method":"POST",
+        "path":"/login",
+        "body":"{\"username\":\"datahub\",\"password\":\"datahub\"}\n",
+        "check":[
+            "actor=urn:li:corpuser:datahub"
+        ]
+    },
+    {
+        "name":"Advantech R-SeeNet",
+        "method":"POST",
+        "path":"/index.php",
+        "body":"page=login_change&oper=0&username=admin&password=conel&submit=Login\n",
+        "check":[
+            "User is succesfully logged.",
+            "<title>R-SeeNet"
+        ]
+    },
+    {
+        "name":"Showdoc",
+        "method":"POST",
+        "path":"/server/index.php?s=/api/user/login",
+        "body":"username=showdoc&password=123456",
+        "check":[
+            "\"username\":\"showdoc\"",
+            "\"uid\":\"1\"",
+            "\"error_code\":0",
+            "Set-Cookie:"
+        ]
+    },
+    {
+        "name":"Zabbix",
+        "method":"POST",
+        "path":"/index.php",
+        "body":"name=Admin&password=zabbix&autologin=1&enter=Sign+in",
+        "check":[
+            "\"zabbix.php?action=dashboard.view\""
+        ]
+    },
+    {
+        "name":"OpenFire",
+        "method":"POST",
+        "path":"/login.jsp",
+        "body":"url=%2Findex.jsp&login=true&csrf={{randcsrf}}&username=admin&password=admin",
+        "check":[
+            "hosturl+\"/index.jsp\""
+        ]
+    },
+    {
+        "name":"Dell EMC ECOM",
+        "method":"GET",
+        "path":"/",
+        "body":null,
+        "check":[
+            "Welcome to ECOM",
+            "ECOMSecurity"
+        ]
+    },
+    {
+        "name":"Dubbo Admin",
+        "method":"GET",
+        "path":"/",
+        "body":null,
+        "check":[
+            "\"<title>Dubbo Admin</title>\"",
+            "\"'/logout'\"",
+            "\"/sysinfo/versions\""
+        ]
+    },
+    {
+        "name":"Apache DolphinScheduler",
+        "method":"POST",
+        "path":"/dolphinscheduler/login",
+        "body":"userName=admin&userPassword=dolphinscheduler123",
+        "check":[
+            "\"msg\":\"login success\"",
+            "\"sessionId\":"
+        ]
+    },
+    {
+        "name":"o2oa",
+        "method":"POST",
+        "path":"/x_organization_assemble_authentication/jaxrs/authentication/captcha?v=7.3&lg6aq1g1",
+        "body":"{\"credential\":\"xadmin\",\"password\":\"Kn2Q3eM/KMmNrM287ju4ELXjA63+86QJOQ4mE6ASnn6mdUmp6K4gfarzQxGzl1VwFbskPkk5p34uCEbm4WDa9LYjB7e/GtFpSakHkb3HVc7EmZF9Reap/ci2Ern00lMJIl4/1RFYGNO1MYNJtEAfcG8NVpgG7FaFAm8Dbw+Tb9U=\",\"isEncrypted\":\"y\"}\n",
+        "check":[
+            "\"employee\":",
+            "\"success\"",
+            "\"xadmin\""
+        ]
+    },
+    {
+        "name":"Geoserver",
+        "method":"POST",
+        "path":"/geoserver/j_spring_security_check",
+        "body":"username=admin&password=geoserver",
+        "check":[
+            "\"/geoserver/web\"",
+            "\"error=true\""
+        ]
+    },
+    {
+        "name":"WSO2 Management Console",
+        "method":"POST",
+        "path":"/carbon/admin/login_action.jsp",
+        "body":"username=admin&password=admin",
+        "check":[
+            "/carbon/admin/index.jsp?loginStatus=true",
+            "JSESSIONID"
+        ]
+    },
+    {
+        "name":"SeedDMS",
+        "method":"POST",
+        "path":"/op/op.Login.php",
+        "body":"login=admin&pwd=admin&lang=",
+        "check":[
+            "\"/out/out.ViewFolder.php\""
+        ]
+    },
+    {
+        "name":"HP 1820-8G Switch J9979A",
+        "method":"POST",
+        "path":"/htdocs/login/login.lua",
+        "body":"username=admin&password=",
+        "check":[
+            "\"redirect\": \"/htdocs/pages/main/main.lsp\"",
+            "\"error\": \"\""
+        ]
+    },
+    {
+        "name":"JBoss JMX Console Weak Credential",
+        "method":"GET",
+        "path":"/jmx-console/",
+        "body":null,
+        "check":[
+            "JSESSIONID",
+            "<title>JBoss JMX Management Console</title>"
+        ]
+    },
+    {
+        "name":"Jenkins",
+        "method":"GET",
+        "path":"/login",
+        "body":null,
+        "check":[
+            "Sign in [Jenkins]"
+        ]
+    },
+    {
+        "name":"Azkaban Web Client",
+        "method":"POST",
+        "path":"/",
+        "body":"action=login&username=admin&password=admin",
+        "check":[
+            "\"session.id\"",
+            "\"success\"",
+            "application/json",
+            "azkaban.browser.session.id"
+        ]
+    },
+    {
+        "name":"wayos-default-password",
+        "method":"POST",
+        "path":"/login.cgi",
+        "body":"user=root&password=admin&Submit=%E7%99%BB+%E9%99%86\n",
+        "check":[
+            "\"window.open('index.htm?_\""
+        ]
+    },
+    {
+        "name":"Jupyterhub",
+        "method":"POST",
+        "path":"/hub/login?next=",
+        "body":"username=admin&password=admin",
+        "check":[
+            "response.raw_header.ibcontains(b'jupyterhub-session-id=",
+            "jupyterhub-hub-login="
+        ]
+    },
+    {
+        "name":"UPS Adapter CS141 SNMP Module",
+        "method":"POST",
+        "path":"/api/login",
+        "body":"{\"userName\":\"admin\",\"password\":\"cs141-snmp\"}\n",
+        "check":[
+            "accessToken",
+            "application/json"
+        ]
+    },
+    {
+        "name":"Rockmongo",
+        "method":"POST",
+        "path":"/index.php?action=login.index&host=0",
+        "body":"more=0&host=0&username=admin&password=admin&db=&lang=zh_cn&expire=3",
+        "check":[
+
+        ]
+    },
+    {
+        "name":"ARL",
+        "method":"POST",
+        "path":"/api/user/login",
+        "body":"{\"username\":\"admin\",\"password\":\"arlpass\"}\n",
+        "check":[
+            "\"message\": \"success\"",
+            "\"username\": \"admin\"",
+            "\"type\": \"login\""
+        ]
+    },
+    {
+        "name":"AudioCodes 310HD, 320HD, 420HD, 430HD & 440HD",
+        "method":"POST",
+        "path":"/login.cgi",
+        "body":"user=admin&psw={{password}}\n",
+        "check":[
+            "Login failed. Check username and password",
+            "\"redirect('/mainform.cgi?go=mainframe.htm"
+        ]
+    },
+    {
+        "name":"Apache Apisix",
+        "method":"POST",
+        "path":"/apisix/admin/user/login",
+        "body":"{\"username\":\"admin\",\"password\":\"admin\"}\n",
+        "check":[
+            "\"data\"",
+            "\"token\"",
+            "\"code\":0"
+        ]
+    },
+    {
+        "name":"HortonWorks SmartSense",
+        "method":"GET",
+        "path":"/apt/v1/context",
+        "body":null,
+        "check":[
+            "\"SUPPORTSESSIONID\""
+        ]
+    },
+    {
+        "name":"Adobe Experience Manager Felix Console",
+        "method":"GET",
+        "path":"/system/console/bundles",
+        "body":null,
+        "check":[
+            "<title>Adobe Experience Manager Web Console - Bundles</title>",
+            "text/html"
+        ]
+    },
+    {
+        "name":"Grafana",
+        "method":"POST",
+        "path":"/login",
+        "body":"{\"user\":\"admin\",\"password\":\"admin\"}",
+        "check":[
+            "\"message\":",
+            "\"Logged in\"",
+            "grafana_session"
+        ]
+    },
+    {
+        "name":"Emqx",
+        "method":"POST",
+        "path":"/api/v4/auth",
+        "body":"{\"username\":\"admin\",\"password\":\"public\"}\n",
+        "check":[
+            "\"{\\\"code\\\":0}\""
+        ]
+    },
+    {
+        "name":"Oracle Business Intelligence",
+        "method":"POST",
+        "path":"/xmlpserver/services/XMLPService",
+        "body":"<soapenv:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:rep=\"http://xmlns.oracle.com/oxp/service/report\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <rep:createSession soapenv:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">\n         <username xsi:type=\"xsd:string\">Administrator</username>\n         <password xsi:type=\"xsd:string\">Administrator</password>\n         <domain xsi:type=\"xsd:string\">bi</domain>\n      </rep:createSession>\n   </soapenv:Body>\n</soapenv:Envelope>\n",
+        "check":[
+            "createSessionReturn"
+        ]
+    },
+    {
+        "name":"OpenEMR",
+        "method":"POST",
+        "path":"/interface/main/main_screen.php?auth=login&site=default",
+        "body":"new_login_session_management=1&languageChoice=1&authUser=admin&clearPass=pass&languageChoice=10",
+        "check":[
+            "main.php?token_main=",
+            "OpenEMR"
+        ]
+    },
+    {
+        "name":"NS-ICG",
+        "method":"POST",
+        "path":"/user/login/login",
+        "body":"usrname=ns25000&pass=ns25000&signinfo=&ukey_user_flag=0&SlotSerialNumber=&agree=",
+        "check":[
+            "/user/main/"
+        ]
+    },
+    {
+        "name":"Adobe AEM",
+        "method":"POST",
+        "path":"/libs/granite/core/content/login.html/j_security_check",
+        "body":"_charset_=utf-8&j_username=admin&j_password=admin&j_validate=true\n",
+        "check":[
+            "login-token",
+            "crx.default"
+        ]
+    },
+    {
+        "name":"Apache Ambari",
+        "method":"GET",
+        "path":"/api/v1/users/admin?fields=*,privileges/PrivilegeInfo/cluster_name,privileges/PrivilegeInfo/permission_name",
+        "body":null,
+        "check":[
+            "\"PrivilegeInfo\"",
+            "\"AMBARI.\""
+        ]
+    },
+    {
+        "name":"Hongdian",
+        "method":"GET",
+        "path":"/",
+        "body":null,
+        "check":[
+            "status_main.cgi",
+            "text/html"
+        ]
+    },
+    {
+        "name":"Axis2",
+        "method":"POST",
+        "path":"/axis2-admin/login",
+        "body":"loginUsername=admin&loginPassword=axis2",
+        "check":[
+            "<h1>Welcome to Axis2 Web Admin Module !!</h1>"
+        ]
+    },
+    {
+        "name":"Kingsoft V8",
+        "method":"POST",
+        "path":"/inter/ajax.php?cmd=get_user_login_cmd",
+        "body":"{\"get_user_login_cmd\":{\"name\":\"admin\",\"password\":\"21232f297a57a5a743894a0e4a801fc3\"}}",
+        "check":[
+            "\"admin\"",
+            "\"usersession\""
+        ]
+    },
+    {
+        "name":"MapGis Cloud Manager",
+        "method":"POST",
+        "path":"/manager/user/login",
+        "body":"username=admin&password=MZYZFc8xsG3D4BsrNFyA1rycKm7C7PUwzxItAbdFu7gJ%3DE%3DN&code=",
+        "check":[
+            "\"msg\":",
+            "\"code\":",
+            "\"token\":"
+        ]
+    },
+    {
+        "name":"Cloudera Hue",
+        "method":"GET",
+        "path":"/hue/accounts/login?next=/",
+        "body":null,
+        "check":[
+            "welcome to hue"
+        ]
+    },
+    {
+        "name":"ExacqVision",
+        "method":"POST",
+        "path":"/service.web",
+        "body":"action=login&u=admin&p=admin256\n",
+        "check":[
+            "\"auth\":",
+            "\"success\": true",
+            "application/json"
+        ]
+    },
+    {
+        "name":"XXL-JOB",
+        "method":"POST",
+        "path":"/xxl-job-admin/login",
+        "body":"userName={{username}}&password={{password}}",
+        "check":[
+            "\"code\":200",
+            "\"msg\"",
+            "\"content\"",
+            "application/json",
+            "XXL_JOB_LOGIN_IDENTITY"
+        ]
+    },
+    {
+        "name":"Aolynk BR304",
+        "method":"GET",
+        "path":"/index_main.html",
+        "body":null,
+        "check":[
+            "/menu_admin.html"
+        ]
+    },
+    {
+        "name":"utt-default-password",
+        "method":"POST",
+        "path":"/action/login",
+        "body":"username=admin&password=admin",
+        "check":[
+            "\"var time=0;\"",
+            "\"var leftPwdNums=0;\""
+        ]
+    },
+    {
+        "name":"Spectracom",
+        "method":"POST",
+        "path":"/users/login",
+        "body":"data%5Bbutton%5D=submit&data%5BUser%5D%5Busername%5D=spadmin&data%5BUser%5D%5Bpassword%5D=admin123",
+        "check":[
+            "spectracom",
+            "deleted"
+        ]
+    },
+    {
+        "name":"Opentwrt",
+        "method":"GET",
+        "path":"/cgi-bin/luci",
+        "body":null,
+        "check":[
+            "cgi-bin/luci/admin/system/admin"
+        ]
+    },
+    {
+        "name":"Trilithic Viewpoint",
+        "method":"POST",
+        "path":"/ViewPoint/admin/Site/ViewPointLogin",
+        "body":"{u:\"admin\", t:\"undefined\", p:\"trilithic\", d:\"\", r:false, w:false}\n",
+        "check":[
+            "\"authorized\":true",
+            "redirectUrl"
+        ]
+    },
+    {
+        "name":"Nexus",
+        "method":"POST",
+        "path":"/service/rapture/session",
+        "body":"username=YWRtaW4%3D&password=YWRtaW4xMjM%3D",
+        "check":[
+            "NXSESSIONID"
+        ]
+    },
+    {
+        "name":"Versa Networks SD-WAN Application",
+        "method":"POST",
+        "path":"/versa/login",
+        "body":"username=Administrator&password=versa123&sso=systemRadio",
+        "check":[
+            "\"/versa/app/index.html\"",
+            "JSESSIONID="
+        ]
+    },
+    {
+        "name":"Jinher oa C6",
+        "method":"POST",
+        "path":"/c6/Jhsoft.Web.login/AjaxForLogin.aspx",
+        "body":"type=login&loginCode={{base64user}}&pwd={{base64pass}}&\n",
+        "check":[
+            "\\xcf\\xb5\\xcd\\xb3\\xb9\\xdc\\xc0\\xed\\xd4\\xb1\\x7c",
+            "\\xc4\\xfa\\xba\\xc3\\x7c\\x7c\\x7c",
+            "SessionIDAdmin="
+        ]
+    },
+    {
+        "name":"Telecom Gateway",
+        "method":"POST",
+        "path":"/manager/login.php",
+        "body":"Name=admin&Pass=admin",
+        "check":[
+            "\"index-shang.php\"",
+            "\"di.php\""
+        ]
+    },
+    {
+        "name":"AlphaWeb XE",
+        "method":"GET",
+        "path":"/php/node_info.php",
+        "body":null,
+        "check":[
+            "HW Configuration",
+            "SW Configuration"
+        ]
+    },
+    {
+        "name":"ActiveMQ",
+        "method":"GET",
+        "path":"/admin/",
+        "body":null,
+        "check":[
+            "\"Welcome to the Apache ActiveMQ Console of\"",
+            "\"<h2>Broker</h2>\""
+        ]
+    },
+    {
+        "name":"Nps",
+        "method":"POST",
+        "path":"/login/verify",
+        "body":"username=admin&password=123",
+        "check":[
+            "\"application/json\"",
+            "\"msg\": \"login success\"",
+            "\"status\": 1"
+        ]
+    },
+    {
+        "name":"phpMyAdmin",
+        "method":"GET",
+        "path":"/index.php",
+        "body":null,
+        "check":[
+            "name=\"token\"",
+            "name=\"set_session\""
+        ]
+    },
+    {
+        "name":"Dell iDRAC6/7/8",
+        "method":"POST",
+        "path":"/data/login",
+        "body":"user=root&password=calvin",
+        "check":[
+            "<authResult>0</authResult>"
+        ]
+    },
+    {
+        "name":"StackStorm",
+        "method":"POST",
+        "path":"/auth/tokens",
+        "body":null,
+        "check":[
+            "\"user\":",
+            "\"token\":",
+            "\"expiry\":"
+        ]
+    },
+    {
+        "name":"Ricoh",
+        "method":"POST",
+        "path":"/web/guest/en/websys/webArch/login.cgi",
+        "body":"wimToken=&userid_work=&userid={{user1)}}&password_work=&password=&open=",
+        "check":[
+            "response.raw_header"
+        ]
+    },
+    {
+        "name":"Inspur Clusterengine 4",
+        "method":"POST",
+        "path":"/login",
+        "body":"op=login&username=admin|pwd&password=123456",
+        "check":[
+            "\"exitcode\":0",
+            "username=admin|pwd"
+        ]
+    },
+    {
+        "name":"Apache Kafka Center",
+        "method":"POST",
+        "path":"/login/system",
+        "body":"{\"name\":\"admin\",\"password\":\"admin\",\"checkbox\":false}\n",
+        "check":[
+            "application/json",
+            "\"code\":200",
+            "\"name\":\"admin\"",
+            "\"realName\":null",
+            "\"teamIDs\":null"
+        ]
+    },
+    {
+        "name":"Panabit Gateway",
+        "method":"POST",
+        "path":"/login/userverify.cgi",
+        "body":"username=admin&password=panabit",
+        "check":[
+            "\"paonline_admin\"",
+            "\"URL=/index.htm\""
+        ]
+    },
+    {
+        "name":"Apache Druid",
+        "method":"POST",
+        "path":"/druid/submitLogin",
+        "body":"loginUsername={{username}}&loginPassword={{password}}",
+        "check":[
+            "response.body"
+        ]
+    },
+    {
+        "name":"DLink",
+        "method":"POST",
+        "path":"/login.cgi",
+        "body":"tm=1647092159.427&user={{username}}&password={{password}}&selectLanguage=CH&OKBTN=%E7%99%BB%E5%BD%95",
+        "check":[
+            "\"window.open('index.htm?\""
+        ]
+    },
+    {
+        "name":"Gitlab",
+        "method":"POST",
+        "path":"/oauth/token",
+        "body":"{\"grant_type\":\"password\",\"username\":\"root\",\"password\":\"5iveL!fe\"}\n",
+        "check":[
+            "\"application/json\"",
+            "\"access_token\":",
+            "\"token_type\":",
+            "\"refresh_token\":"
+        ]
+    },
+    {
+        "name":"DVWA",
+        "method":null,
+        "path":null,
+        "body":null,
+        "check":[
+
+        ]
+    },
+    {
+        "name":"PowerJob",
+        "method":"POST",
+        "path":"/appInfo/assert",
+        "body":"{\"appName\":\"powerjob-worker-samples\",\"password\":\"powerjob123\"}\n",
+        "check":[
+            "{\"success\":true,\"data\":",
+            "application/json"
+        ]
+    },
+    {
+        "name":"Openerp",
+        "method":"POST",
+        "path":"/web/session/authenticate",
+        "body":"{\"jsonrpc\":\"2.0\",\"method\":\"call\",\"params\":{\"db\":\"OPENERP7\",\"login\":\"admin\",\"password\":\"admin\",\"base_location\":\"{{hosturl}}\",\"session_id\":\"{{r1}}\",\"context\":{}},\"id\":\"r7\"}\n",
+        "check":[
+            "\"\\\"username\\\": \\\"admin\\\",\""
+        ]
+    },
+    {
+        "name":"secnet ac",
+        "method":"POST",
+        "path":"/login.cgi",
+        "body":"user=admin&password=admin",
+        "check":[
+            "ac_userid=admin,ac_passwd="
+        ]
+    },
+    {
+        "name":"IBM Storage Management",
+        "method":"POST",
+        "path":"/0/Authenticate",
+        "body":"j_username=admin&j_password=admin&continue=&submit=submit+form",
+        "check":[
+            "JSESSIONID",
+            "/0/Console",
+            "Property of IBM"
+        ]
+    },
+    {
+        "name":"Apache Karaf",
+        "method":"GET",
+        "path":"/system/console",
+        "body":null,
+        "check":[
+            "Apache Karaf Web Console - Bundles",
+            "Web Console</a>",
+            "Log out</a>"
+        ]
+    },
+    {
+        "name":"DELL iDRAC9",
+        "method":"POST",
+        "path":"/sysmgmt/2015/bmc/session",
+        "body":null,
+        "check":[
+            "response.status == 201 || response.status == 200",
+            "\"authResult\":0"
+        ]
+    },
+    {
+        "name":"Datang AC",
+        "method":"POST",
+        "path":"/login.cgi",
+        "body":"user=admin&password1=%E8%AF%B7%E8%BE%93%E5%85%A5%E5%AF%86%E7%A0%81&password=123456&Submit=%E7%AB%8B%E5%8D%B3%E7%99%BB%E5%BD%95",
+        "check":[
+            "\"ac_userid=admin,ac_passwd=\"",
+            "\"window.open('index.htm?_\""
+        ]
+    },
+    {
+        "name":"Xerox WorkCentre 7xxx",
+        "method":"POST",
+        "path":"/userpost/xerox.set",
+        "body":"_fun_function=HTTP_Authenticate_fn&NextPage=%2Fproperties%2Fauthentication%2FluidLogin.php&webUsername=admin&webPassword=1111&frmaltDomain=default",
+        "check":[
+            "window.opener.top.location.pathname",
+            "Xerox Corporation",
+            "response.body.bcontains(b'invalid",
+            "errmsg"
+        ]
+    }
+]

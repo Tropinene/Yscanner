@@ -2,6 +2,7 @@
 package main
 
 import (
+	"Yscanner/default_pwd"
 	goplugin "Yscanner/plugin"
 	"Yscanner/utils"
 	"bufio"
@@ -21,6 +22,7 @@ func main() {
 	vFlag := flag.String("v", "", "载入指定漏洞编号的插件，不指定默认全部检测")
 	pFlag := flag.String("p", "", "按指纹载入插件")
 	fFlag := flag.String("f", "", "存储检测url的文件")
+	dFlag := flag.String("d", "", "检测默认密码")
 	showFlag := flag.Bool("s", false, "展示所有检测插件")
 
 	// 解析命令行参数
@@ -41,6 +43,17 @@ func main() {
 		return
 	}
 
+	// 默认账密检测
+	if *dFlag != "" {
+		if *fFlag != "" {
+			check_default_pwd(*dFlag, *fFlag, true)
+		} else {
+			check_default_pwd(*dFlag, *tFlag, false)
+		}
+		return
+	}
+
+	// 脚本检测
 	var plugins []goplugin.Plugin
 
 	if *vFlag != "" {
@@ -107,7 +120,7 @@ func main() {
 		bar.Finish()
 
 		elapsed := time.Since(start).Seconds()
-		fmt.Printf("\033[36m[INFO] 检测所用时间: %.1fs\n\033[0m", elapsed)
+		fmt.Printf("\n\033[36m[INFO] 检测所用时间: %.1fs\n\033[0m", elapsed)
 	}
 }
 
@@ -167,5 +180,51 @@ func showPlugins() {
 	for idx, plugin := range plugins {
 		info := plugin.Info()
 		fmt.Printf("\033[36m[%2d] %-13s | %-15s | %s\n\033[0m", idx+1, info.Level, info.VulnID, info.Name)
+	}
+}
+
+func check_default_pwd(finger_print, target string, is_file bool) {
+	if is_file {
+		urls, err := readLinesWithoutNewline(target)
+		if err != nil {
+			fmt.Printf("\033[1;35m[ERROR] %v\033[0m\n", err)
+			return
+		}
+		fmt.Printf("\033[36m[INFO] Check %d urls...\n\033[0m", len(urls))
+		start := time.Now()
+
+		bar := utils.Newbar(int64(len(urls)))
+		var wg sync.WaitGroup
+		var results []string
+		for _, url := range urls {
+			wg.Add(1)
+			go func(u string) {
+				defer wg.Done()
+				name, exists := default_pwd.Default_login(u, finger_print)
+				if exists {
+					// fmt.Printf("\r\033[33m[!] \033[1;31m%s 默认账号密码存在：%s\033[0m\n", name, u)
+					results = append(results, fmt.Sprintf("\r\033[33m[!] \033[1;31m%s 默认账号密码存在：%s\033[0m\n", name, u))
+				}
+
+				bar.Done(1)
+			}(url)
+		}
+		wg.Wait()
+		bar.Finish()
+
+		fmt.Printf("\r")
+		for _, res := range results {
+			fmt.Printf(res)
+		}
+
+		elapsed := time.Since(start).Seconds()
+		fmt.Printf("\033[36m[INFO] 检测所用时间: %.1fs\n\033[0m", elapsed)
+	} else {
+		name, exists := default_pwd.Default_login(target, finger_print)
+		if exists {
+			fmt.Printf("\r\033[33m[!] \033[1;31m%s 默认账号密码存在：%s\033[0m\n", name, target)
+		} else {
+			fmt.Printf("\033[36m[INFO] %s 默认账号密码不存在: %s\033[0m\n", name, target)
+		}
 	}
 }

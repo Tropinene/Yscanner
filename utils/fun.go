@@ -82,7 +82,7 @@ func (bar *Bar) Done(i int64) {
 
 // Finish 完成最后进度条
 func (bar *Bar) Finish() {
-	fmt.Println(bar.get_progress_string())
+	fmt.Printf(bar.get_progress_string())
 }
 
 // get_percent 获取进度百分比,区间0-100
