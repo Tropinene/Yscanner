@@ -8,6 +8,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"sort"
 	"strings"
 	"sync"
 	"time"
@@ -158,6 +159,9 @@ func readLinesWithoutNewline(filePath string) ([]string, error) {
 
 func showPlugins() {
 	plugins := goplugin.GetAllPlugins()
+	sort.Slice(plugins, func(i, j int) bool {
+		return plugins[i].Info().Name < plugins[j].Info().Name
+	})
 
 	// 打印每个插件的信息
 	for idx, plugin := range plugins {
