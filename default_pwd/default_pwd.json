@@ -880,5 +880,14 @@
             "response.body.bcontains(b'invalid",
             "errmsg"
         ]
+    },
+    {
+        "name":"Sentinel",
+        "method":"POST",
+        "path":"/auth/login?password=sentinel&username=sentinel",
+        "body":null,
+        "check":[
+            "\"msg\":\"success\""
+        ]
     }
 ]

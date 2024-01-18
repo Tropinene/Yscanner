@@ -218,7 +218,7 @@ func check_default_pwd(finger_print, target string, is_file bool) {
 		}
 
 		elapsed := time.Since(start).Seconds()
-		fmt.Printf("\033[36m[INFO] 检测所用时间: %.1fs\n\033[0m", elapsed)
+		fmt.Printf("\n\033[36m[INFO] 检测所用时间: %.1fs\n\033[0m", elapsed)
 	} else {
 		name, exists := default_pwd.Default_login(target, finger_print)
 		if exists {

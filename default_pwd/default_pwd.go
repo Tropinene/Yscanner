@@ -27,7 +27,7 @@ func Default_login(netloc, finger_print string) (string, bool) {
 	if err != nil {
 		return dict.Name, false
 	}
-	resp, err := utils.RequestDo(req, true, 5)
+	resp, err := utils.RequestDo(req, true, 3)
 	if err != nil {
 		return dict.Name, false
 	}
