@@ -173,7 +173,7 @@ func readLinesWithoutNewline(filePath string) ([]string, error) {
 func showPlugins() {
 	plugins := goplugin.GetAllPlugins()
 	sort.Slice(plugins, func(i, j int) bool {
-		return plugins[i].Info().Name < plugins[j].Info().Name
+		return plugins[i].Info().VulnID < plugins[j].Info().VulnID // 按漏洞编号排序
 	})
 
 	// 打印每个插件的信息
