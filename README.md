@@ -38,3 +38,7 @@ default_pwd.json保存了从网络上开源的yaml脚本中检测默认账号密
 
 # 支持漏洞
 CVE-2024-0195\CVE-2024-0352\CVE-2024-0305\CVE-2024-0713\CVE-2024-0490\CVE-2023-51467\CVE-2023-22527\CVE-2023-35885等三十余个漏洞
+
+# Screen Shot
+![](./screenshot/scan_files.png)
+![](./screenshot/show_plugins.png)
