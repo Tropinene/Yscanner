@@ -112,8 +112,11 @@ func (pm *PluginManager) ExecuteAll(netloc string, is_file bool) []string {
 		res := plugin.Info()
 		// 执行插件
 		if plugin.Check(netloc) {
-			// 这里开头的\r是为了覆盖进度条的
-			info = fmt.Sprintf("\r\033[33m[!] \033[1;31m%-12s | %-14s | %s: \033[1;34m%s\033[0m", res.Level, res.VulnID, res.Name, netloc)
+			if res.VulnID == "" {
+				info = fmt.Sprintf("\r\033[33m[!] \033[1;31m%-8s | %s: \033[1;34m%s\033[0m", res.Level, res.Name, netloc)
+			} else {
+				info = fmt.Sprintf("\r\033[33m[!] \033[1;31m%-12s | %-14s | %s: \033[1;34m%s\033[0m", res.Level, res.VulnID, res.Name, netloc)
+			}
 		} else {
 			if !is_file {
 				info = fmt.Sprintf("\033[36m[INFO] %s 不存在 %s\033[0m", netloc, res.Name)
